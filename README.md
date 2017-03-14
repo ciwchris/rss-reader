@@ -10,6 +10,10 @@ FeedScan
 
 **config.js:** Configuration values for all Functions.
 
+QueryFeed
+---------
+
+**index.js:** Http Function to retrieve the top five entries from each feed.
 
 Todo
 ----
