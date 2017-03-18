@@ -28,12 +28,26 @@ module.exports = function (context, myTimer) {
                 context.log('Error loading feed: ' + feedUrl);
                 rootCallback(null, []);
             } else {
-                async.parallel(
-                articles.map(article => function (callback) { loadFeedEntries(callback, feedUrl, article); }),
-                function(error, results) {
-                    rootCallback(null, null);
-                });
+                addNewEntries(rootCallback, feedUrl, articles);
             }
+        });
+    }
+
+    function addNewEntries(rootCallback, feedUrl, articles) {
+        async.filter(articles, function(article, callback) {
+            var query = new azure.TableQuery()
+                .where('PartitionKey eq ? && link eq ?', encodeURIComponent(feed), article.link);
+            tableSvc.queryEntities(config.table, query, null, function(error, result, response) {
+                callback(null, result.entries.length === 0);
+            });
+        },
+        function(error, results) {
+            context.log('inserting: ' + results.length);
+            async.parallel(
+            results.map(article => function (callback) { loadFeedEntries(callback, feedUrl, article); }),
+            function(error, results) {
+                rootCallback(null, null);
+            });
         });
     }
 
@@ -41,9 +55,11 @@ module.exports = function (context, myTimer) {
         var entGen = azure.TableUtilities.entityGenerator;
         var task = {
             PartitionKey: entGen.String(encodeURIComponent(feed)),
-            RowKey: entGen.String(encodeURIComponent(article.link)),
+            RowKey: entGen.String(999999999999999 - new Date().getTime() + '-' + encodeURIComponent(article.link)),
             title: entGen.String(article.title),
             link: entGen.String(article.link),
+            published: entGen.DateTime(article.published),
+            feed: entGen.String(article.feed.name)
             //content: entGen.String(article.content)
         };
 
