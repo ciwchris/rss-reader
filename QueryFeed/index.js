@@ -1,4 +1,4 @@
-ar azure = require('azure-storage');
+var azure = require('azure-storage');
 var async = require('async');
 var config = require('../FeedScan/config');
 

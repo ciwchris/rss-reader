@@ -18,8 +18,8 @@ QueryFeed
 Todo
 ----
 
-[ ] Setup CI of functions
-[ ] Stop inserting when first duplicate entry is found
+[x] Setup CI of functions
+[x] Stop inserting when first duplicate entry is found
 [ ] Create UI
 [ ] Purge items after a certain time
 [ ] Mark items as read

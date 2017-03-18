@@ -1,4 +1,4 @@
-odule.exports = {
+module.exports = {
     table: 'feeds',
     feeds: [
         'https://www.archlinux.org/feeds/news/',
