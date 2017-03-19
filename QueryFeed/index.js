@@ -16,15 +16,17 @@ module.exports = function (context, req) {
 
     function queryFeed(callback, feed) {
         var query = new azure.TableQuery()
-            .select(['title','link'])
-            .top(25)
+            .select(['title','link','feed','published'])
+            .top(5)
             .where('PartitionKey eq ?', encodeURIComponent(feed));
         tableSvc.queryEntities(config.table, query, null, function(error, result, response) {
             if(error) throw error;
 
             var entries = result.entries.map(article => {return {
                     title: article.title._,
-                    link: article.link._
+                    link: article.link._,
+                    feed: article.feed._,
+                    published: article.published._
                     //content: article.content._
             }});
 
