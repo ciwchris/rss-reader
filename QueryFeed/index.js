@@ -14,11 +14,13 @@ module.exports = function (context, req) {
         else context.done(null, {body: results})
     });
 
+
     function queryFeed(callback, feed) {
+        var cutOffDate = new Date(new Date().setDate((new Date()).getDate() - 14));
         var query = new azure.TableQuery()
             .select(['title','link','feed','published'])
             .top(5)
-            .where('PartitionKey eq ?', encodeURIComponent(feed));
+            .where('PartitionKey eq ? and published > ?', encodeURIComponent(feed), cutOffDate);
         tableSvc.queryEntities(config.table, query, null, function(error, result, response) {
             if(error) throw error;
 
