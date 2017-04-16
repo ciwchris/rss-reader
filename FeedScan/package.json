@@ -11,7 +11,9 @@
   "license": "ISC",
   "dependencies": {
     "async": "^2.1.5",
-    "feed-read": "0.0.1",
+    "feed-read-parser": "0.0.6",
+    "iconv-lite": "^0.4.15",
+    "sax": "^1.2.2",
     "azure-storage": "^2.1.0"
   }
 }
