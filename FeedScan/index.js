@@ -9,6 +9,10 @@ module.exports = function (context, myTimer) {
 
     var tableSvc = azure.createTableService();
 
+    function output(list) {
+        list.forEach(l => context.log(l.title));
+    }
+
     tableSvc.createTableIfNotExists(config.table, function(error, result, response){
         if(error){
             context.log('Error creating table: ' + JSON.stringify(error));
@@ -25,28 +29,40 @@ module.exports = function (context, myTimer) {
                         });
                     },
                     function(error, results) {
-                        context.log('inserting: ' + results.length);
-                        async.parallel(
-                        results.map(article => function (callback) { loadFeedEntries(callback, article); }),
-                        function(error, results) {
-                            if (error) context.done(null, {status: 500, body: JSON.stringify(error)})
-                            else context.done(null, {body: 'Scan completed'})
-                        });
+                        if (error) context.done(null, {status: 500, body: JSON.stringify(error)})
+                        else {
+                            var resultTitles = results.map(r => r.link);
+                            var filteredArticles = articles.filter(article => {
+                                return resultTitles.includes(article.link);
+                            });
+                            context.log('inserting: ' + filteredArticles.length);
+
+                            for (var i=filteredArticles.length -1; i >= 0; i--) {
+                                loadFeedEntries(i * 10, filteredArticles[i]);
+                            }
+/*
+                            results.reverse().forEach(article => {
+                                context.log(article.title + ' ' + article.published);
+                                loadFeedEntries(article);
+                            }),
+                            */
+                           setTimeout(() => { context.done(null, {body: 'Scan completed'});}, 20000);
+                        }
                     });
                 }
             });
         }
     });
 
-    function loadFeedEntries(callback, article) {
+    function loadFeedEntries(delay, article) {
         var entGen = azure.TableUtilities.entityGenerator;
         var task = {
             PartitionKey: entGen.String(encodeURIComponent(article.feed.source)),
-            RowKey: entGen.String(999999999999999 - new Date().getTime() + '-' + encodeURIComponent(article.link)),
+            RowKey: entGen.String((999999999999999 - new Date().getTime() - delay) + '-' + encodeURIComponent(article.link)),
             title: entGen.String(article.title),
             link: entGen.String(article.link),
             published: entGen.DateTime(article.published),
-            feed: entGen.String(article.feed.source)
+            feed: entGen.String(article.feed.name)
             //content: entGen.String(article.content)
         };
 
@@ -54,8 +70,6 @@ module.exports = function (context, myTimer) {
             if(error && error.statusCode !== 409){
                 context.log('Error inserting article: ' + JSON.stringify(error));
             }
-
-            callback(null, null);
         });
     }
 };
