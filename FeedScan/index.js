@@ -9,10 +9,6 @@ module.exports = function (context, myTimer) {
 
     var tableSvc = azure.createTableService();
 
-    function output(list) {
-        list.forEach(l => context.log(l.title));
-    }
-
     tableSvc.createTableIfNotExists(config.table, function(error, result, response){
         if(error){
             context.log('Error creating table: ' + JSON.stringify(error));
@@ -37,16 +33,10 @@ module.exports = function (context, myTimer) {
                             });
                             context.log('inserting: ' + filteredArticles.length);
 
-                            for (var i=filteredArticles.length -1; i >= 0; i--) {
-                                loadFeedEntries(i * 10, filteredArticles[i]);
+                            for (var i=0; i < filteredArticles.length; i++) {
+                                loadFeedEntries(i * 100, filteredArticles[i]);
                             }
-/*
-                            results.reverse().forEach(article => {
-                                context.log(article.title + ' ' + article.published);
-                                loadFeedEntries(article);
-                            }),
-                            */
-                           setTimeout(() => { context.done(null, {body: 'Scan completed'});}, 20000);
+                            context.done(null, {body: 'Scan completed'});
                         }
                     });
                 }
@@ -55,10 +45,11 @@ module.exports = function (context, myTimer) {
     });
 
     function loadFeedEntries(delay, article) {
+        //context.log((999999999999999 - new Date().getTime() + delay) + ':' + article.title);
         var entGen = azure.TableUtilities.entityGenerator;
         var task = {
             PartitionKey: entGen.String(encodeURIComponent(article.feed.source)),
-            RowKey: entGen.String((999999999999999 - new Date().getTime() - delay) + '-' + encodeURIComponent(article.link)),
+            RowKey: entGen.String((999999999999999 - new Date().getTime() + delay) + ''),
             title: entGen.String(article.title),
             link: entGen.String(article.link),
             published: entGen.DateTime(article.published),
