@@ -18,10 +18,10 @@ module.exports = function (context, req) {
 
             tableSvc.insertEntity(table, task, function (error, result, response) {
                 if(error && error.statusCode !== 409){
-                    context.log('Error inserting subscription: ' + JSON.stringify(error));
+                    context.done(null, {status: 500, body: 'Error inserting subscription: ' + JSON.stringify(error)})
+                } else {
+                    context.done(null, {body: 'Subscribed'});
                 }
-                
-                context.done();
             });
         }
     });
