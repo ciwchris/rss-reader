@@ -18,7 +18,7 @@ module.exports = function (context, rssQueueItem) {
         TTL: 60 * 60
     };
 
-    const payload = JSON.stringify({"notification": {"body":"New entry", "title":"RSS reader"}});
+    const payload = JSON.stringify({"notification": {"body":"New entry for " + rssQueueItem.feed, "title":"RSS reader"}});
 
     var query = new azure.TableQuery().select(['subscription']);
     tableSvc.queryEntities(table, query, null, function(error, result, response) {
