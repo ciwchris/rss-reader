@@ -1,5 +1,6 @@
-var azure = require('azure-storage');
+const azure = require('azure-storage');
 const webpush = require('web-push');
+const async = require('async');
 
 module.exports = function (context, req) {
     context.log('Notify function triggered');
@@ -19,28 +20,44 @@ module.exports = function (context, req) {
 
     const payload = JSON.stringify({"notification": {"body":"New entry", "title":"RSS reader"}});
 
-    var query = new azure.TableQuery()
-        .select(['subscription']);
+    var query = new azure.TableQuery().select(['subscription']);
     tableSvc.queryEntities(table, query, null, function(error, result, response) {
         if(error){
-            context.log('Error retrieving subscription: ' + JSON.stringify(error));
-            context.done();
+            context.done(null, {status: 500, body: 'Error retrieving subscription: ' + JSON.stringify(error)})
         }
 
-        for (var i=0; i< result.entries.length; i++) {
-                webpush.sendNotification(
-                    JSON.parse(result.entries[i].subscription._),
-                    payload,
-                    options
-                )
-                .then(() => {
-                    context.log('sent');
-                    context.done();
-                })
-                .catch((err) => {
-                    context.log('error: ' + err.body);
-                    context.done();
-                });
+        /*
+        for (var i=0; i < result.entries.length; i++) {
+            webpush.sendNotification(
+                JSON.parse(result.entries[i].subscription._),
+                payload,
+                options
+            )
+            .then(() => {
+                context.done(null, {body: 'sent'})
+            })
+            .catch((err) => {
+                context.done(null, {status: 500, body: 'error: ' + err.body})
+            });
         }
+        */
+        async.parallel(
+        result.entries.map(entry => function (callback) {
+            webpush.sendNotification(
+                JSON.parse(entry.subscription._),
+                payload,
+                options
+            )
+            .then(() => {
+                callback(null, 'sent');
+            });
+        }),
+        function(error, results) {
+            if (error) {
+                context.done(null, {status: 500, body: 'error: ' + err.body})
+            } else {
+                context.done(null, {body: 'Sent results: ' + JSON.stringify(results)})
+            }
+        });
     });
 };
