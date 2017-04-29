@@ -5,6 +5,13 @@
       "type": "timerTrigger",
       "direction": "in",
       "schedule": "0 0 */12 * * *"
+    },
+    {
+      "name": "rssQueueItem",
+      "type": "queue",
+      "queueName": "new-rss-item",
+      "connection": "rssstoragequeue_STORAGE",
+      "direction": "out"
     }
   ],
   "disabled": false

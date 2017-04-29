@@ -31,8 +31,15 @@ module.exports = function (context, myTimer) {
                             var filteredArticles = articles.filter(article => {
                                 return resultTitles.includes(article.link);
                             });
-                            context.log('inserting: ' + filteredArticles.length);
 
+                            if (filteredArticles.length > 0) {
+                                context.bindings.rssQueueItem = {
+                                    message: 'New RSS entries',
+                                    feed: filteredArticles[0].feed.name
+                                };
+                            }
+
+                            context.log('inserting: ' + filteredArticles.length);
                             for (var i=0; i < filteredArticles.length; i++) {
                                 loadFeedEntries(i * 100, filteredArticles[i]);
                             }

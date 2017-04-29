@@ -2,8 +2,8 @@ const azure = require('azure-storage');
 const webpush = require('web-push');
 const async = require('async');
 
-module.exports = function (context, req) {
-    context.log('Notify function triggered');
+module.exports = function (context, rssQueueItem) {
+    context.log('Notify function triggered: ' + JSON.stringify(rssQueueItem));
     const table = 'subscriptions';
 
     var tableSvc = azure.createTableService();
@@ -26,21 +26,6 @@ module.exports = function (context, req) {
             context.done(null, {status: 500, body: 'Error retrieving subscription: ' + JSON.stringify(error)})
         }
 
-        /*
-        for (var i=0; i < result.entries.length; i++) {
-            webpush.sendNotification(
-                JSON.parse(result.entries[i].subscription._),
-                payload,
-                options
-            )
-            .then(() => {
-                context.done(null, {body: 'sent'})
-            })
-            .catch((err) => {
-                context.done(null, {status: 500, body: 'error: ' + err.body})
-            });
-        }
-        */
         async.parallel(
         result.entries.map(entry => function (callback) {
             webpush.sendNotification(

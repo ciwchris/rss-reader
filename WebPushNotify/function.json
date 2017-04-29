@@ -1,20 +1,11 @@
 {
   "bindings": [
     {
-      "authLevel": "anonymous",
-      "type": "httpTrigger",
+      "name": "rssQueueItem",
+      "type": "queueTrigger",
       "direction": "in",
-      "name": "req",
-      "methods": [
-        "get",
-        "head",
-        "options"
-      ]
-    },
-    {
-      "type": "http",
-      "direction": "out",
-      "name": "$return"
+      "queueName": "new-rss-item",
+      "connection": "rssstoragequeue_STORAGE"
     }
   ],
   "disabled": false
