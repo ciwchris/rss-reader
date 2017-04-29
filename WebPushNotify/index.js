@@ -14,8 +14,8 @@ module.exports = function (context, rssQueueItem) {
             publicKey: 'BGPwmeJvcajyK7v-H3_tdESj9VwLpbO_I4oYrI4rnPlWERU2LGtrlD25oxGZ7vf0D8rJO4M0crHQ2SbhvCelahs',
             privateKey: '1t8vQEtqkmy34wtmede8yt8wlMPfOcISj9QZBM-cJmU'
         },
-        // 1 hour in seconds
-        TTL: 60 * 60
+        // 1 day in seconds
+        TTL: 60 * 60 * 24
     };
 
     const payload = JSON.stringify({"notification": {"body":"New entry for " + rssQueueItem.feed, "title":"RSS reader"}});
