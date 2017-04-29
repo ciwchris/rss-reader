@@ -13,7 +13,7 @@ module.exports = function (context, req) {
             var task = {
                 PartitionKey: entGen.String('rssreader'),
                 RowKey: entGen.String(req.body.subscription.keys.auth),
-                title: entGen.String(JSON.stringify(req.body.subscription))
+                subscription: entGen.String(JSON.stringify(req.body.subscription))
             };
 
             tableSvc.insertEntity(table, task, function (error, result, response) {

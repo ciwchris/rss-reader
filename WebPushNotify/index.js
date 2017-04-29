@@ -20,7 +20,7 @@ module.exports = function (context, req) {
     const payload = JSON.stringify({"notification": {"body":"New entry", "title":"RSS reader"}});
 
     var query = new azure.TableQuery()
-        .select(['title']);
+        .select(['subscription']);
     tableSvc.queryEntities(table, query, null, function(error, result, response) {
         if(error){
             context.log('Error retrieving subscription: ' + JSON.stringify(error));
@@ -29,7 +29,7 @@ module.exports = function (context, req) {
 
         for (var i=0; i< result.entries.length; i++) {
                 webpush.sendNotification(
-                    JSON.parse(result.entries[i].title._),
+                    JSON.parse(result.entries[i].subscription._),
                     payload,
                     options
                 )
