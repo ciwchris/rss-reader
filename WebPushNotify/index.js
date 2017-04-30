@@ -18,7 +18,17 @@ module.exports = function (context, rssQueueItem) {
         TTL: 60 * 60 * 24
     };
 
-    const payload = JSON.stringify({"notification": {"body":"New entry for " + rssQueueItem.feed, "title":"RSS reader"}});
+    const payload = {"notification": {
+        "title": "RSS reader",
+        "body": "New entry for " + rssQueueItem.feed,
+        "icon": "https://ciwchris.github.io/rss-reader-ng-client/assets/images/icons/icon-192x192.png",
+        "data": "index.html",
+        "actions": [{
+            "action": "open",
+            "title": "Open reader",
+        }],
+        "requireInteraction": true}
+    };
 
     var query = new azure.TableQuery().select(['subscription']);
     tableSvc.queryEntities(table, query, null, function(error, result, response) {
@@ -30,7 +40,7 @@ module.exports = function (context, rssQueueItem) {
         result.entries.map(entry => function (callback) {
             webpush.sendNotification(
                 JSON.parse(entry.subscription._),
-                payload,
+                JSON.stringify(payload),
                 options
             )
             .then(() => {
