@@ -10,7 +10,7 @@ module.exports = function (context, rssQueueItem) {
 
     const options = {
         vapidDetails: {
-            subject: 'https://rss-reader.azurewebsites.net/api/WebPushSubscribe',
+            subject: 'https://rss-reader.azurewebsites.net/api/WebPushNotify',
             publicKey: 'BGPwmeJvcajyK7v-H3_tdESj9VwLpbO_I4oYrI4rnPlWERU2LGtrlD25oxGZ7vf0D8rJO4M0crHQ2SbhvCelahs',
             privateKey: '1t8vQEtqkmy34wtmede8yt8wlMPfOcISj9QZBM-cJmU'
         },
@@ -22,6 +22,7 @@ module.exports = function (context, rssQueueItem) {
         "title": "RSS reader",
         "body": "New entry for " + rssQueueItem.feed,
         "icon": "https://ciwchris.github.io/rss-reader-ng-client/assets/images/icons/icon-192x192.png",
+        "badge": "https://ciwchris.github.io/rss-reader-ng-client/assets/images/icons/badge.png",
         "data": "index.html",
         "actions": [{
             "action": "open",
