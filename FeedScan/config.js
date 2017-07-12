@@ -7,6 +7,7 @@ module.exports = {
         'https://www.booleanknot.com/blog/feed.xml',
         'http://feeds.feedburner.com/OdeToCode',
         'https://blogs.msdn.microsoft.com/commandline/feed/',
-        'http://rss-reader-test-blog.blogspot.com/feeds/posts/default?alt=rss'
+        'http://rss-reader-test-blog.blogspot.com/feeds/posts/default?alt=rss',
+        'https://azure.microsoft.com/en-us/roadmap/azure-functions-visual-studio-2017-azure-functions-tooling/feed/'
     ]
 };
