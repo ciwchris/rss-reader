@@ -1,5 +1,8 @@
 const messages = [
-    'Without purpose, we can survive—but we cannot flourish.'
+    'Without purpose, we can survive—but we cannot flourish.',
+    'I understood that if I wish to understand life and its meaning, I must not live the life of a parasite, but must live a real life,',
+    'To hope to understand the meaning of that will one must first perform it by doing what is wanted of us. But if I will not do what is wanted of me, I shall never understand what is wanted of me',
+    'I told myself that divine truth cannot be accessible to a separate individual; it is revealed only to the whole assembly of people united by love. To attain truth one must not separate, and in order not to separate one must love and must endure things one may not agree with.'
 ];
 
 const azure = require('azure-storage');
