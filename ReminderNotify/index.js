@@ -1,4 +1,6 @@
-const message = 'Without purpose, we can survive—but we cannot flourish.';
+const messages = [
+    'Without purpose, we can survive—but we cannot flourish.'
+];
 
 const azure = require('azure-storage');
 const webpush = require('web-push');
@@ -20,9 +22,12 @@ module.exports = function (context) {
         TTL: 60 * 60 * 24
     };
 
+    // The do not use example from: https://www.npmjs.com/package/random-js
+    var randomMessageIndex = Math.floor(Math.random() * (messages.length +1));
+
     const payload = {"notification": {
         "title": "Reminder",
-        "body": message,
+        "body": messages[randomMessageIndex],
         "icon": "https://ciwchris.github.io/rss-reader-ng-client/assets/images/icons/notification-bell-192.png",
         "badge": "https://ciwchris.github.io/rss-reader-ng-client/assets/images/icons/notification-bell-192.png",
         "requireInteraction": true}
