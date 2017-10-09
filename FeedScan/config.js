@@ -9,6 +9,7 @@ module.exports = {
         'https://blogs.msdn.microsoft.com/commandline/feed/',
         'http://rss-reader-test-blog.blogspot.com/feeds/posts/default?alt=rss',
         'https://azure.microsoft.com/en-us/roadmap/azure-functions-visual-studio-2017-azure-functions-tooling/feed/',
-        'https://blog.angularindepth.com/feed'
+        'https://blog.angularindepth.com/feed',
+        'http://blog.ploeh.dk/rss'
     ]
 };
