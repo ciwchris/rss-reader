@@ -5,7 +5,7 @@ const messages = [
     'I told myself that divine truth cannot be accessible to a separate individual; it is revealed only to the whole assembly of people united by love. To attain truth one must not separate, and in order not to separate one must love and must endure things one may not agree with.',
     'First, arouse in the other person an eager want. He who can do this has the whole world with him. He who cannot walks a lonely way.',
     "That is what Schwab did. But what do average people do? The exact opposite. If they don't like a thing, they bawl out their subordinates; if they do like it, they say nothing.",
-    "If out of reading this book you get just one thing—an increased tendency to think always in terms of other people's point of view, and see things from their angle—if",
+    "If, as a result of reading this book, you get only one thing—an increased tendency to think always in terms of the other person's point of view, and see things from that person's angle as well as your own—if",
     "You can make more friends in two months by becoming interested in other people than you can in two years by trying to get other people interested in you.",
     "It is the individual who is not interested in his fellow men who has the greatest difficulties in life and provides the greatest injury to others.",
     "Nine times out of ten, an argument ends with each of the contestants more firmly convinced than ever that he is absolutely right.",
@@ -14,9 +14,8 @@ const messages = [
     "If we know we are going to be rebuked anyhow, isn't it far better to beat the other person to it and do it ourselves? Isn't it much easier to listen to self-criticism than to bear condemnation from alien lips?",
     "Keep emphasizing, if possible, that you are both striving for the same end and that your only difference is one of method and not of purpose.",
     "Don't you have much more faith in ideas that you discover for yourself than in ideas that are handed to you on a silver platter?",
-    "If, as a result of reading this book, you get only one thing—an increased tendency to think always in terms of the other person's point of view, and see things from that person's angle as well as your own—if",
-    "I don’t blame you one iota for feeling as you do. If I were you I would undoubtedly feel just as you do.",
-    "Asking questions not only makes an order more palatable; it often stimulates the creativity of the persons whom you ask."
+    "Asking questions not only makes an order more palatable; it often stimulates the creativity of the persons whom you ask.",
+    "Upholders ask: 'Should I do this?' 'What should be done.' 'Self-command & performance.' Questioners ask: 'Does this make sense?' 'Justification.' Obligers ask: 'Does this matter to anyone else?' 'Accountability.' 'Teamwork & duty' Rebels ask: 'Is this the person I want to be?' 'Their own way.' 'Self-identity.'"
 ];
 
 const azure = require('azure-storage');
