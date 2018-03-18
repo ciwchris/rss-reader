@@ -16,6 +16,14 @@ const messages = [
     "Don't you have much more faith in ideas that you discover for yourself than in ideas that are handed to you on a silver platter?",
     "Asking questions not only makes an order more palatable; it often stimulates the creativity of the persons whom you ask.",
     "Upholders ask: 'Should I do this?' 'What should be done.' 'Self-command & performance.' Questioners ask: 'Does this make sense?' 'Justification.' Obligers ask: 'Does this matter to anyone else?' 'Accountability.' 'Teamwork & duty' Rebels ask: 'Is this the person I want to be?' 'Their own way.' 'Self-identity.'"
+    "But Jesus demonstrated that true power means restraint and mercy.",
+    "The decisions we make during the throes of wrenching emotion sometimes have great ramifications.",
+    "It is always prudent to be cautious before trusting someone, because you don't always know whether they deserve your trust until it is too late. It is often not until the end of the journey that you learn the true character of your companion.",
+    "If we have no firm commitments and haven't already determined which of our national convictions are nonnegotiable, our whole system will implode under the weight of momentary decisions.",
+    "if the church is going to be the church of Jesus Christ, it must learn the power of love before it is too late.",
+    "find themselves advising a single person that it is better to have not loved than to have loved and been betrayed. these who live with disappointment in this area may well be the most Christlike people in the world today,",
+    "However, if you are not a praying person, you are carrying your faith—you are trying to make your faith work for you apart from your source of power—and trying to carry the infinite is very exhausting.",
+    "Jesus tells us that God will give the Holy Spirit, his indwelling presence, to those who ask for it. That is the whole point of the prayer.",
 ];
 
 const azure = require('azure-storage');
