@@ -10,6 +10,7 @@ module.exports = {
         'http://rss-reader-test-blog.blogspot.com/feeds/posts/default?alt=rss',
         'https://azure.microsoft.com/en-us/roadmap/azure-functions-visual-studio-2017-azure-functions-tooling/feed/',
         'https://blog.angularindepth.com/feed',
-        'http://blog.ploeh.dk/rss'
+        'http://blog.ploeh.dk/rss',
+        'https://medium.com/feed/ngrx/'
     ]
 };
