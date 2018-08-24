@@ -11,6 +11,7 @@ module.exports = {
         'https://azure.microsoft.com/en-us/roadmap/azure-functions-visual-studio-2017-azure-functions-tooling/feed/',
         'https://blog.angularindepth.com/feed',
         'http://blog.ploeh.dk/rss',
+        'https://github.com/dbriemann/glyph/releases.atom',
         'https://medium.com/feed/ngrx/'
     ]
 };
